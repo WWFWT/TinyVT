@@ -68,7 +68,7 @@ EXTERN_C VOID DriverUnload(PDRIVER_OBJECT driver)
 	UNREFERENCED_PARAMETER(driver);
 
 	//先销毁HOOK再退VT
-	DestroyEptHook();
+	//DestroyEptHook();
 	//延时等一下销毁完毕
 	NdisStallExecution(50);
 
@@ -102,7 +102,7 @@ EXTERN_C VOID DriverEntry(PDRIVER_OBJECT driver, UNICODE_STRING path)
 
 	//等一下所有核心加载完VT
 	NdisStallExecution(50);
-	HookTest();
+	//HookTest();
 	
 	Log("驱动加载");
 }

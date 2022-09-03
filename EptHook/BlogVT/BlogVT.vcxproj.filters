@@ -68,8 +68,5 @@
     <MASM Include="Asm.asm">
       <Filter>Source Files</Filter>
     </MASM>
-    <MASM Include="Asm.txt">
-      <Filter>Source Files</Filter>
-    </MASM>
   </ItemGroup>
 </Project>

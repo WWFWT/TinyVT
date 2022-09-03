@@ -32,6 +32,7 @@ EptCommonEntry* GetPteByPhyAddr(ULONG_PTR addr)
 
 BOOLEAN InitEpt()
 {
+	if (!UseEpt) return FALSE;
 	ULONG_PTR index = 0;
 	ULONG_PTR* PML4T = 0, * PDPT = 0;
 

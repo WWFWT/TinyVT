@@ -34,7 +34,11 @@ void* __cdecl operator new(size_t size) {
 	if (size == 0) {
 		size = 1;
 	}
-	return ExAllocatePoolWithTag(NonPagedPool, size, 'vt');
+	PVOID ptr = ExAllocatePool2(POOL_FLAG_NON_PAGED, size, 'vt');
+	if (ptr == NULL) {
+		Log("new操作分配内存失败！");
+	}
+	return ptr;
 }
 
 _IRQL_requires_max_(DISPATCH_LEVEL)
@@ -50,7 +54,10 @@ PVOID kmalloc(ULONG_PTR size)
 	PHYSICAL_ADDRESS MaxAddr = { 0 };
 	MaxAddr.QuadPart = -1;
 	PVOID addr = MmAllocateContiguousMemory(size, MaxAddr);
-	if (addr) RtlSecureZeroMemory(addr, size);
+	if (addr)
+		RtlSecureZeroMemory(addr, size);
+	else
+		Log("分配内存失败");
 	return addr;
 }
 

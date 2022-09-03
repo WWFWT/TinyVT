@@ -16,7 +16,7 @@ TinyVT::~TinyVT()
 	cr4.all = __readcr4();
 	if (cr4.fields.vmxe)
 	{
-		cr4.fields.vmxe = 0;
+		cr4.fields.vmxe = FALSE;
 		__writecr4(cr4.all);
 	}
 
@@ -25,15 +25,16 @@ TinyVT::~TinyVT()
 	kfree((PVOID)MsrBitmap);
 	kfree(VmmStack);
 
-	Ia32FeatureControlMsr msr = { 0 };
-	msr.all = __readmsr(MsrFeatureControl);
-	if (msr.fields.lock)
-	{
-		msr.fields.lock = FALSE;
-		msr.fields.enable_vmxon = FALSE;
-		__writemsr(MsrFeatureControl, msr.all);
-		msr.all = __readmsr(MsrFeatureControl);
-	}
+	//在执行vmxoff指令之后，不用去再设置为FALSE了
+	//Ia32FeatureControlMsr msr = { 0 };
+	//msr.all = __readmsr(MsrFeatureControl);
+	//if (msr.fields.lock)
+	//{
+	//	msr.fields.lock = FALSE;
+	//	msr.fields.enable_vmxon = FALSE;
+	//	__writemsr(MsrFeatureControl, msr.all);
+	//	msr.all = __readmsr(MsrFeatureControl);
+	//}
 }
 
 BOOLEAN TinyVT::StartVT()

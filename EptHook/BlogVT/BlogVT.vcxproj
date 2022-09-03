@@ -155,7 +155,6 @@
     <ClInclude Include="TinyVT.h" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="Asm.txt" />
     <MASM Include="Asm.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -85,7 +85,7 @@ AsmVmmEntryPoint PROC
 	sub rsp,50h
 	call VmexitHandler;该函数执行有三种结果,一种是遇到非预期的vmexit直接断点.返回0继续运行,需要vmresume. 返回1退出vmx,回到guest
 	add rsp,50h
-	test rax,rax
+	test al,al
 	jz ExitVmx		;返回0则退出vmx
 
 	POPAQ
